@@ -1,0 +1,33 @@
+\documentclass[11pt,twocolumn,notitlepage,openany,twoside]{book}
+\usepackage[paperheight=11.25in,paperwidth=8.75in, margin=0.625in]{geometry}
+\usepackage{titlesec}
+\usepackage{verbatim}
+\pagestyle{headings}
+
+% Figure setup
+\usepackage[]{graphicx}
+\graphicspath{ {figures/} }
+\usepackage{float}
+\setlength{\floatsep}{0pt plus 2.0pt minus 2.0pt}
+\setlength{\dbltextfloatsep}{5pt plus 2.0pt minus 2.0pt}
+\usepackage{caption}
+
+% Table setup
+\usepackage[table]{xcolor}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage{multirow}
+
+\newcommand*{\tabbox}[2][t]{%
+    \vspace{0pt}\parbox[#1][1.7\baselineskip]{8pt}{\strut#2\strut}}
+
+\newcommand*{\tabboxb}[2][t]{%
+    \vspace{0pt}\parbox[#1][2.2\baselineskip]{8pt}{\strut#2\strut}}
+
+% Remove the giant space at the beginning of a chapter
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+
+\title{Metabolic interactions and capabilities within microbial communities}
+\author{Gregory Leonard Medlock}
