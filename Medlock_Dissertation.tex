@@ -45,9 +45,9 @@
 % \renewcommand*{\bibfont}{\small}
 
 \usepackage[backend=biber, style=numeric-comp,sorting=none,terseinits=true, giveninits=true,maxbibnames=4]{biblatex}
-\addbibresource{compiled_refs.bib}
+\addbibresource{rf_compiled_refs.bib}
 % There's a non-ASCII character somewhere in the bib, so we need this package:
-%\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
 
 \begin{document}
 \frontmatter
@@ -55,6 +55,7 @@
 \begingroup
 \let\clearpage
 
+\setcounter{tocdepth}{3}
 \tableofcontents
 \hspace{1.5cm}
 \listoffigures
@@ -213,6 +214,12 @@ We next sought to investigate potential cross-fed metabolites from ConYE for co-
 
 ConYE can identify metabolites that are potentially cross-fed, but the actual behavior of each strain in co-culture with respect to that metabolite is difficult to infer using existing experimental techniques. Because we can only evaluate the co-culture behavior based on an expectation derived from monoculture behavior, it is still possible that co-culture leads to reduced production and consumption of those metabolites rather than cross-feeding. We sought to provide orthogonal evidence for ConYE results by evaluating the potential for metabolites to increase the growth rate of a strain in monoculture, reasoning that ConYE may produce false-positive inferences if metabolites are not actually coupled with biomass production. We chose to support inferences made using ConYE by building and applying Genome-scale metabolic network reconstructions (GENREs). GENREs are mathematical representations of all metabolic reactions that an organism can carry out, and have been used extensively to predict the effect of environmental conditions on growth of bacterial species \cite{Oberhardt2009-iu}. We created an ensemble of 100 GENREs for each strain in this study to gain greater confidence in cross-feeding predictions and to enable predictive modeling of metabolism in future studies (Figure S3A and S3B; see Methods). For each metabolite, we evaluated its impact on growth of individual strains by performing ensemble flux balance analysis (EnsembleFBA \cite{Biggs2017-md} to predict the growth rate of the strain without the metabolite available and with the metabolite available in excess (see Methods). We performed this procedure for the cross-feeding candidate metabolites between \textit{Clostridium} ASF356 and \textit{Parabacteroides} ASF519. If a metabolite increases the predicted \textit{in silico} growth rate when available in excess, we take that as parallel evidence to support or oppose the ConYE-based inferences. EnsembleFBA results are summarized in Figure S3 for all metabolites except tyramine, which was not present in any GENREs within the ensemble for \textit{Clostridium} ASF356.
 
+\begin{figure*}[tb]
+\centering
+\includegraphics[width=0.8\textwidth]{ch2_figS3}
+\caption[Computational model-driven interrogation of potential metabolic interactions and experimental validation of a cross-feeding interaction.]{\textbf{Computational model-driven interrogation of potential metabolic interactions}  \textbf{A)} Process for generating and applying a genome-scale metabolic network reconstruction (GENRE). \textbf{B)} Novel pipeline for constructing and analyzing ensembles of GENREs for the ASF strains. Details for each step in Methods. \textbf{C)} EnsembleFBA predictions of the influence of potentially cross-fed metabolites on growth of \textit{Clostridium} ASF356. Biomass production values are for flux through the biomass reaction in units of hour-1, and a metabolite was considered essential if removal led to flux through the biomass reaction of less than < 1E-5/hour. Predicted flux through biomass in the experimental medium without any supplement or metabolite removal is 0.079/hour.}
+\end{figure*}
+
 Valine was essential for growth of \textit{Clostridium ASF356} in all 100 GENREs in its ensemble. Isoleucine was essential for 85/100 GENREs but had no effect on growth for the other 15 GENREs, while absence of the rest of the potentially cross-fed metabolites had no effect on predicted growth rate. Given the \textit{in silico} essentiality of valine and the ConYE results indicating valine was as abundant as expected, valine may have conferred a growth benefit to \textit{Clostridium} ASF356 if cross-fed between \textit{Clostridium} ASF356 and \textit{Parabacteroides} ASF519. While isoleucine was essential for growth of the majority of GENREs in the \textit{Clostridium} ASF356 ensemble, there was a subset of GENREs in which its removal had no effect. Given this \textit{in silico} uncertainty, as well as the ConYE result which indicated it was more abundant than expected in co-culture, we hypothesized that cross-feeding of isoleucine may not have influenced growth of \textit{Clostridium} ASF356 as much as valine. Alanine, proline, choline, and formate were not essential and did not influence predicted growth rates \textit{in silico}. Critically, however, this analysis indicated that availability of any of the individual metabolites in excess did not confer a growth benefit relative to the unsupplemented medium.
 
 \subsubsection{\textit{In vitro} investigation of an inferred cross-feeding interaction}
@@ -222,6 +229,12 @@ Given the lack of an \textit{in silico} prediction which indicated that suppleme
 To test the hypothesis that \textit{Clostridium} ASF356 experiences a growth benefit in the presence of proline and suitable electron donors, we grew \textit{Clostridium} ASF356 in media supplemented with proline, alanine, isoleucine, valine, or each combination of the three electron donors (alanine, isoleucine, valine) with proline. NMR spectroscopy cannot differentiate between amino acid isomers, so we assumed all amino acids consumed and produced were the L- isoform (as in tryptone, the major source of amino acids in the medium). Organisms conducting Stickland fermentation of proline generally possess a proline racemase, since D-proline is the isoform that is fermented \cite{Watanabe2015-wa}. Leucine was consumed by both strains in monoculture, thus was excluded because it was unlikely to be cross-fed in co-culture. Only the monoculture supplemented with both proline and alanine had increased density relative to no supplement (Figure 2.6D, \textit{p} < 0.05, Mann-Whitney U-test with false discovery rate control using Benjamini-Hochberg procedure), suggesting that co-metabolism of proline and alanine contributes to growth of \textit{Clostridium} ASF356. Given that the ConYE results indicated that alanine was more abundant in co-culture than expected, the results of the supplementation experiment imply that production of alanine by \textit{Parabacteroides} ASF519 was increased in co-culture with \textit{Clostridium} ASF356 or that \textit{Clostridium} ASF356 used alanine more efficiently in co-culture. Additionally, the lack of growth benefit conferred by supplementation of proline with isoleucine or valine suggests that any change attributable to pairing either electron donor with proline was too small to detect given our sample size. Formate can also be used as an electron donor for proline reduction in the Stickland reaction \cite{Kabisch1999-jf}, which we did not factor into our experiments. Formate was produced by \textit{Parabacteroides} ASF519 and consumed by \textit{Clostridium} ASF356 in monoculture, and was less abundant than expected in co-culture according to ConYE. Thus, formate may have also contributed to the observed growth benefit.
 
 After performing these supplementation experiments, we attempted identification of 5-aminovalerate in the supernatant from \textit{Clostridium} ASF356 and \textit{Parabacteroides} ASF519 co-culture using 2D $^1\!$H homonuclear correlation spectroscopy (COSY), which can identify metabolites with overlap in 1D NMR spectra (Figure S5; Methods). 5-aminovalerate was not present at detectable quantities; the peaks within the overlapping region which we suspected to contain 5-aminovalerate were from valine and gamma-aminobutyrate (GABA). Thus, Stickland fermentation only occurred if 5-aminovalerate was further degraded. Such activity has been observed in \textit{Clostridium viride} (formerly \textit{Clostridium aminovalericum}), which converts 5-aminovalerate to valerate, acetate, propionate, and ammonia \cite{Barker1985-rs,Barker1987-jt}. Additionally, synthesis of GABA from glutamate is broadly distributed in plants and bacteria, and the responsible enzyme in some organisms is known to convert 5-aminovalerate to glutamate via promiscuous 5-aminovalerate transaminase activity \cite{Shin2016-vy,Yonaha1985-xp}. Both \textit{Clostridium} ASF356 and \textit{Parabacteroides} ASF519 have multiple putative proteins similar to known 5-aminovalerate transaminase enzymes (BLAST E value < 1E-50, 31-34\% identity; compared to gabT gene from \textit{Pseudomonas putida} KT2440), so either strain may be capable of producing GABA from 5-aminovalerate.
+
+\begin{figure*}[tb]
+\centering
+\includegraphics[width=0.8\textwidth]{ch2_figS5}
+\caption[2D $^1\!$H NMR spectra collected on a single sample of supernatant from co-culture of \textit{Clostridium} ASF356 and \textit{Parabacteroides} ASF519]{\textbf{2D $^1\!$H NMR spectra collected on a single sample of supernatant from co-culture of \textit{Clostridium} ASF356 and \textit{Parabacteroides} ASF519} 2D spectra show gamma-aminobutyrate, not 5-aminovalerate, in the region overlapping with valine in 1D. Peaks corresponding to valine shown in red, gamma-aminobutyrate shown in blue.}
+\end{figure*}
 
 We also tested the effect of concurrent supplementation with Stickland pairs \textit{in silico}, which did not lead to any predicted growth benefit because the GENREs do not contain Stickland fermentation reactions. Stickland reactions are absent from reaction databases used to construct and curate GENREs such as the ModelSEED biochemistry database \cite{Henry2010-um}, but are present in the AGORA resource of semi-automatically generated GENREs for gut microbes \cite{Magnusdottir2017-dk}. None of the genes involved in Stickland fermentation have been identified in the genome of \textit{Clostridium} ASF356 as of this writing (determined via searching the annotated \textit{Clostridium} ASF356 genome in PATRIC \cite{Wattam2017-tk}, BLAST against D-proline reductase gene subunits). Taken together, these results suggest that proline and alanine co-supplementation confers a growth benefit through an alternative pathway or through Stickland fermentation with subsequent breakdown of 5-aminovalerate.
 
@@ -252,12 +265,47 @@ This is in the subsection
 
 Acknowledgements
 
+
 \section{References}
 \printbibliography[heading=none]
 
-\end{refsection}
-%\end{refsection}
+\section{Supplemental Figures}
 
+\begin{figure*}
+\centering
+\includegraphics[width=0.8\textwidth]{ch2_figS1}
+\caption[Heatmap describing supernatant metabolomes for all mono- and co-cultures after growth.]{\textbf{Heatmap describing supernatant metabolomes for all mono- and co-cultures after growth.} Red indicates higher concentration than fresh medium, while blue indicates lower concentration. Values are centered at 0 using the mean value in fresh media, then scaled between -1 and +1 by dividing by the maximum change in concentration for each metabolite in any sample in the study. Only metabolites for which an identity could be determined are shown. Hierarchical clustering of metabolites was performed using Euclidean distances and complete linkage.}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.8\textwidth]{ch2_figS2}
+\caption[Optical density-based growth curves for \textit{Clostridium} ASF356, \textit{Lactobacillus} ASF360, \textit{Lactobacillus} ASF361, \textit{Eubacterium} ASF492, and \textit{Parabacteroides} ASF519.]{\textbf{Optical density-based growth curves for \textit{Clostridium} ASF356, \textit{Lactobacillus} ASF360, \textit{Lactobacillus} ASF361, \textit{Eubacterium} ASF492, and \textit{Parabacteroides} ASF519.} Optical density was measured at 589nm. Experiments were performed in 96 well plates with 200uL total volume in each well. Each sample group (monocultures and co-cultures) contains 8 biological replicates from a single experiment (e.g. each replicate was grown in an independent well, but they were derived from the same starter culture). Line shows the mean for each sample group, and shading extends one standard deviation from the mean in both the positive and negative direction. Sky blue line indicates monoculture for the strain labelled in sky blue along the x axis. Orange line indicates monoculture for the strain labelled in orange along the y axis. Black line indicates co-culture of the two strains. Diagonal shows the monoculture growth curve for each species. Axes units are identical on all subplots. Time is shown in hours, extending to 72 hours.}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.8\textwidth]{ch2_figS4}
+\caption[Selected examples of ConYE results using bootstrapped strain abundances.]{\textbf{Selected examples of ConYE results using bootstrapped strain abundances.} Top row shows the distribution of ConYE \textit{p}-values for each metabolite and bottom row shows the distribution of difference from the expected value for the same metabolite within each column. Examples are from the co-culture of \textit{Clostridium} ASF356 and \textit{Parabacteroides} ASF519. Distributions were generated by recalculating the average abundance of each strain in monoculture using leave-two-out bootstrapped samples prior to calculating the monoculture yield for each metabolite. N=50 samples with replacement for each monoculture.}
+\end{figure*}
+
+\end{refsection}
+
+
+%------------------------------------------------------------------------------------
+% Chapter 4 Reflections and Future Directions
+%------------------------------------------------------------------------------------
+\chapter{Reflections}
+\begin{refsection}
+
+\section{Reflections}
+
+\section{Future Directions}
+
+\section{References}
+
+\printbibliography[heading=none]
+\end{refsection}
 
 
 \end{document}
