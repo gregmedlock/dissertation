@@ -381,9 +381,79 @@ Acknowledgements
 
 \end{refsection}
 
+%------------------------------------------------------------------------------------
+% Chapter 3 Guiding the refinement of biochemical knowledgebases with ensembles of metabolic networks and machine learning
+%------------------------------------------------------------------------------------
+\chapter{Curation Guidance}
+\begin{refsection}
+
+\section{Context}
+
+\section{Synopsis}
+Mechanistic models are becoming common in biology and medicine. These models are often more generalizable than data-driven models because they explicitly represent known interactions between components. While this generalizability has advantages, it also creates a dilemma: how should efforts be focused to improve model performance? We present an approach to this problem using ensembles of mechanistic models and machine learning, then apply it to genome-scale metabolic network reconstructions. We generate an ensemble of candidate models consistent with experimental data, then perform in silico simulations for which improved predictiveness is desired. We apply unsupervised and supervised learning to these simulation results to identify structural variation in ensemble members that maximally influences variance in simulation outcomes across the ensemble. These structural variants are high priority candidates for curation through targeted experimentation. We demonstrate this approach by applying it to 29 bacterial species to identify curation targets that improve gene essentiality predictions. Our approach represents a fully automated, scalable, and performance-driven recommendation system for curating hypothesis-driven models.
+
+\section{Introduction}
+
+Genome-scale metabolic network reconstructions (GENREs) are knowledgebases describing metabolic capabilities and their biochemical basis for entire organisms. GENREs can be mathematically formalized and combined with numerical representations of biological constraints and objectives to create genome-scale metabolic models (GEMs). These GEMs can be used to predict biological outcomes (e.g. gene essentiality, growth rate) given an environmental context (e.g. metabolite availability) \cite{Oberhardt2009-iu}. GEMs are now used widely for well-studied organisms such as Escherichia coli and Saccharomyces cerevisiae, but GEMs for most other organisms are much more taxing to create and curate, partially due to the exhaustive and manually-driven steps required \cite{Thiele2010-yq}.
+
+Systems for automatically generating GEMs of sufficient quality for limited purposes have been developed \cite{Henry2010-um}, but the methods used to further curate GEMs are nearly universally under-reported in the literature. Curation methods for GEMs that take researchers many months to years to develop are often summarized qualitatively with limited description. This is not surprising, given the difficulty in prioritizing areas for curation of network-based, highly connected mechanistic models such as GEMs.
+
+In practice, heuristics are typically used to prioritize curation, such as curating portions of the GEM directly involved in the manipulation of a metabolite, gene, or pathway of known interest. These heuristics, combined with targeted literature searches, allow task-based curation and GEM evaluation, which is increasingly supported in software related to genome-scale metabolic modeling \cite{Lieven2018-fo, Wang2018-yn}. However, identifying the network components that influence the predictions of interest is not an intuitive process because biological networks are generally highly connected.
+
+One way to view this issue is through the lens of a sensitivity analysis, asking how much variation in the parameters of a model will impact a simulation of interest. Such an approach has been developed and applied to dynamic models of biological networks \cite{Babtie2014-vy}, which relies on quantified uncertainty in the structure of a model. Uncertainty quantification has been applied at the level of individual components within a GEM, either by considering the probability of a function being present in a network based on sequence comparisons \cite{Benedict2014-yo} or by leveraging network structure to more accurately estimate these probabilities \cite{Plata2012-ys}. However, an approach that unifies a probabilistic views of GEM structure with simulations performed with them, which would enable structural sensitivity analysis for GEMs, has not been developed to our knowledge.
+
+Recently, we developed a framework for the generation of ensembles of GEMs which can be applied to improve predictive performance over that of an individual GEM \cite{Biggs2017-md}. This approach is analogous to the use of ensembles of data-driven models \cite{Dietterich2000-dq} or hypothesis-driven models such as signaling networks \cite{Kuepfer2007-gq}, and has been applied to metabolic networks for dynamic modeling as well \cite{Tran2008-pt}. Here, we extend our framework to prioritize curation of network-based biological models by coupling ensemble simulations with machine learning. One of the central tenets of systems biology is that models represent our hypotheses about how an organism functions. As such, we can use these models to simulate the behavior we expect according to our hypotheses. Our approach takes advantage of this, generating many hypotheses (e.g. an ensemble) and coupling them with machine learning to identify experiments that optimally improve our understanding of an organism.
+
+\section{Results}
+
+Our approach, which can be generalized to any mechanistic model and simulation task of interest, is summarized as follows. First, we generate many models that are each consistent with experimental data, forming an ensemble of models (\textbf{Figure 3.1a}). We then perform a set of simulations using the ensemble that are related to a task of interest, such as drug target identification or production of a metabolite of commercial interest (\textbf{Figure 3.1b}). Using the output of these simulations, we perform unsupervised learning to generate phenotypic clusters of models, where clustering is determined by similarity of simulation profiles across the entire set of simulations (\textbf{Figure 3.1c}). We then apply supervised learning to predict simulation cluster membership for each model using the values of variable parameters in that model as input (\textbf{Figure 3.1c}). The relative importance of these model parameters in the supervised learning model indicates the impact that uncertainty in that parameter has on simulation outcomes across the ensemble (\textbf{Figure 3.1d}). In other words, resolving the true state of these parameters will maximally reduce uncertainty in the simulations performed with the ensemble. Here, we apply this approach to the task of reducing uncertainty in predicted gene essentiality for 31 bacterial species (\textbf{Figure 3.1a-d}). We generate an ensemble for each species using previously published growth phenotyping data \cite{Plata2015-bc}, predict the effect of genome-wide single gene knockouts, then apply machine learning as described above.
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.8\textwidth]{ch3_fig1}
+\caption[ Approach for a simulation-guided recommendation system for curation of genome-scale metabolic models.]{\textbf{ Approach for a simulation-guided recommendation system for curation of genome-scale metabolic models.} \textbf{a)} A draft GEM is generated using ModelSEED. Algorithmic gapfilling is applied so that the GEM can recapitulate experimental observations, and the process is repeated to identify alternative solutions. These alternative solutions are assembled into an ensemble of GEMs, each of which contains the original content of the draft GEM and a unique set of gapfilled reactions. \textbf{b)} Single gene knockouts are performed using the ensemble, in which production of biomass is evaluated when reactions requiring each gene are inactivated. \textbf{c-d)} Machine learning approach for identifying curation targets based on ensemble simulations. Unsupervised machine learning is applied to the ensemble simulation results, generating two simulation clusters (cluster 1 [red] and cluster 2 [blue]). Here, principal coordinate analysis is used to visualize the similarity of simulation profiles for all models within an ensemble. Simulation clusters are then used as labels in supervised machine learning, which are predicted using model reaction content as input to a random forest classifier. Curation is prioritized based on the features contributing to classifier performance.}
+\end{figure*}
+
+Given our objective of identifying the most impactful experiment or curation effort to improve the quality of our models, we required that our ensembles were large enough to saturate the space of unique simulation results (i.e. predicted behavior) and model structures (i.e. hypotheses). Toward this end, we first subsampled the ensemble for each species and determined the unique reaction content within each subsample (\textbf{Figure 3.2a}). We found that unique reaction content plateaued or nearly plateaued with ensembles containing as few as 100-200 models, suggesting the ensembles we generated sufficiently saturate the space of unique reactions. In other applications, we suspect that organisms with lower quality GEMs (e.g. more gaps in their metabolic network) or less phenotypic profiling data may require additional sampling to saturate this space.
+
+For gene essentiality simulations, the number of variable predictions (e.g. number of genes for which at least one ensemble member disagrees with another member) plateaued in a similar manner (\textbf{Figure 3.2b}). We also performed subsampling for predictions of genes essential for biomass production, which exhibited similar properties of convergence (\textbf{Supplemental Figure 3.1a-b}). Taken together, these subsampling-based results confirm that ensembles containing 1000 models generated using our reconstruction pipeline sufficiently represent the network structure space (e.g. unique reactions) and prediction space (e.g. essentiality profiles) possible given the input data. This behavior is consistent with our previous work examining the performance of ensembles of GEMs for Pseudomonas aeruginosa, in which various aspects of ensemble performance nearly plateaued with only 50 GEMs \cite{Biggs2017-md}. However, in order to ensure that an adequate number of samples are included for downstream machine learning analyses, we maintain the full ensemble of 1000 GEMs for each species in all analyses.
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.8\textwidth]{ch3_fig2}
+\caption[ Subsampling of ensemble content and simulations to demonstrate exhaustive sampling of the solution space.]{\textbf{ Subsampling of ensemble content and simulations to demonstrate exhaustive sampling of the solution space.} \textbf{a)} The variable reaction content in ensemble members as a function of increasing ensemble size. A variable reaction is any reaction that has a variable state across any member of the subsampled group (e.g. it is off in some members and on in some members, but neither entirely off nor entirely on). For each species, the mean number of variable reactions in subsamples of GEMs is shown by the solid line, with the standard deviation shown as light fill of the same color above and below the mean. Subsampling was performed with 1000 draws per subsample size. Ensembles were sampled at intervals of 20 members, e.g. 20, 40, 60... until reaching the size of the entire ensemble. \textbf{b)} Variability in gene essentiality simulations within subsamples of ensemble members. Using the same subsampling procedure as in panel \textbf{a}, the number of genes with at least one GEM in the subsample with a simulation outcome different than the rest (e.g. non-consensus) was determined. The mean for each subsample size is shown by the solid line, with the standard deviation shown as light fill of the same color above and below the mean.}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.8\textwidth]{ch3_fig3}
+\caption[ Application of the curation guidance pipeline to bacterial species.]{\textbf{ Application of the curation guidance pipeline to bacterial species.}  \textbf{a \& c)} Ensemble gene essentiality simulations and unsupervised learning for three representative species. Each heatmap displays essentiality simulations for each ensemble member (row label) after inactivating a single gene (column label). Black cells indicate genes predicted to be essential while white cells indicate genes predicted to be non-essential. Principal coordinate analysis (PCoA) plots next to each heatmap show the similarity between gene essentiality simulation profiles for each ensemble member. Within each PCoA plot, each point represents an ensemble member, colored by cluster membership as determined with k-means clustering (k=2). Percent variance in the pairwise distance matrix explained by each principal coordinate is indicated in parentheses. See Methods for analysis details. \textbf{b)} Example of a network feature driving simulation cluster membership. The top reaction, catalyzed by serine hydroxymethyltransferase, is the primary activity of the enzyme, which was annotated in the draft GEM. The bottom reaction is a promiscuous function of the same enzyme, which was the most important reaction in determining cluster membership (k=2) for \textit{Corynebacterium glutamicum}. (abbreviations; THF is tetrahydrofolate and 5,10-mTHF is 5,10-Methylenetetrahydrofolate). Water is excluded from reactants in the top reaction to simplify visualization. \textbf{d)} Evaluation of performance of GEMs in each simulation cluster compared to genome-wide gene essentiality data. Essentiality datasets from in vitro experiments were collected for \textit{Haemophilus influenzae} and \textit{Staphylococcus aureus}. Precision (TP/[TP + FP], TP = true positives, FP = false positives) and recall (TP/[TP+FN], FN = false negatives) were calculated for each ensemble member for each species. Small red and blue circles indicate an individual ensemble member, colored by simulation cluster membership. Large red and blue circles indicate mean behavior for ensemble members from each cluster, and error bars of same color extend above and below the mean by one standard deviation.}
+\end{figure*}
+
+\section{Discussion}
+
+\section{Conclusion}
+
+\section{Methods}
+\section{Supplemental Figures}
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.8\textwidth]{ch3_figS1}
+\caption[ Subsampled ensemble behavior for predictions of biomass production.]{\textbf{ Subsampled ensemble behavior for predictions of biomass production.} We simulated biomass production in a rich medium across the entire ensemble and subsampled these results at varying ensemble sizes. \textbf{a)} Standard deviation of the mean flux through biomass from each subsample and \textbf{b)} standard deviation of the standard deviation of flux through biomass in each subsample. For both quantities (variance of the mean of each subsample and variance of the variance of each subsample), simulations plateau before inclusion of all 1000 ensemble members. Values on y axis are normalized by dividing by the mean flux through biomass for the entire ensemble.}
+\end{figure*}
+
+\section{Acknowledgements}
+
+\section{References}
+
+\printbibliography[heading=none]
+\end{refsection}
+
+
 
 %------------------------------------------------------------------------------------
-% Chapter 4 Reflections and Future Directions
+% Chapter 5 Reflections and Future Directions
 %------------------------------------------------------------------------------------
 \chapter{Reflections}
 \begin{refsection}
