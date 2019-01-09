@@ -1,2 +1,2 @@
 # dissertation
-My written dissertation.
+My written PhD dissertation.
