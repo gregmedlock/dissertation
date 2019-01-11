@@ -1,4 +1,6 @@
-\documentclass[11pt,twocolumn,notitlepage,openany,twoside]{book}
+%\documentclass[11pt,twocolumn,notitlepage,openany,twoside]{book}
+\documentclass[11pt,onecolumn,notitlepage,openany,twoside]{book}
+\linespread{1.6}
 \usepackage[paperheight=11.25in,paperwidth=8.75in, margin=0.625in]{geometry}
 \usepackage{titlesec}
 \usepackage{verbatim}
@@ -231,7 +233,7 @@ We collected \textit{in vitro} data for growth of all pairwise combinations of 6
 
 \begin{figure*}
 \centering
-\includegraphics[width=0.95\textwidth]{ch2_fig2}
+\includegraphics[width=0.75\textwidth]{ch2_fig2}
 \caption[The effects of pairwise co-culture on the abundance of each strain.]{\textbf{The effects of pairwise co-culture on the abundance of each strain.} \textbf{A)} Relative abundance of each strain in monoculture and co-culture determined via qPCR. Abundance is plotted on linear scale, not log-transformed. x-axis describes abundance of strain at the bottom of the column; y-axis describes abundance of strain left of each row. Diamonds indicate abundance of each strain in monoculture, with mean shown by a dashed line. Abundance of each strain in co-culture as indicated by the row and column labels is shown by a black circle, with mean abundances indicated by grey dashed lines. Abundance for each strain is z-score normalized using mean and standard deviation of monoculture abundance to center and scale the data, respectively. N=9 for all samples except for those with Pseudoflavonifractor ASF500 or Eubacterium ASF492, for which N=6. \textbf{B)} Heatmap of mean abundance of each strain in co-culture relative to monoculture. Blue indicates less abundant, while red indicates more abundant, than monoculture. The upper left and lower right triangles in each square describes abundance of the strain labelled on the left of row and bottom of column, respectively. White circles indicate differential abundance between monoculture and co-culture (\textit{p} \textless\! 0.10, Mann-Whitney U test with false discovery rate correction using Benjamini-Hochberg procedure). \textbf{C)} Summary of interspecies interactions. Non-zero interactions in the triangular matrix indicate significant differential abundance as shown in \textbf{Figure 2.2B}.}
 \end{figure*}
 
@@ -241,7 +243,7 @@ Abundance of each strain in each pair was evaluated to determine whether a negat
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{ch2_fig3}
+\includegraphics[width=0.8\textwidth]{ch2_fig3}
 \caption[Metabolic behavior of each strain in monoculture and emergent behavior in co-cultures.]{\textbf{Metabolic behavior of each strain in monoculture and emergent behavior in co-cultures.} \textbf{A)} Heatmap describing supernatant metabolomes for each monoculture. Red/blue indicate higher/lower concentrations than fresh medium, respectively. Values are centered at 0 using the mean in fresh media, then scaled between -1 and +1 by dividing by the maximum change in concentration for each metabolite in any sample in the study. Unnamed metabolites not shown. Hierarchical clustering was performed using Euclidean distances and complete linkage. \textbf{B-E)} Principal component analysis (PCA) of monocultures and co-culture, performed independently for each subplot. Sky blue/orange circles correspond to monoculture supernatant metabolomes from strain labelled with same color. Co-culture samples for the two strains in each subplot title are indicated by grey circles. Percent variance captured by each principal component is labelled on each axis.}
 \end{figure*}
 
@@ -277,7 +279,7 @@ When a metabolite was consumed by one strain in monoculture and produced by the 
 
 \begin{figure}[tb]
 \centering
-\includegraphics[width=\linewidth]{ch2_fig5}
+\includegraphics[width=0.7\linewidth]{ch2_fig5}
 \caption[Interpretations of ConYE results for metabolites consumed by one strain in monoculture and produced by another strain in monoculture.]{\textbf{Interpretations of ConYE results for metabolites consumed by one strain in monoculture and produced by another strain in monoculture.} In this example, the consumer experienced a growth benefit. The shaded region of each volcano plot describes the points that fall into the category described on left. In “Importance in growth benefit to consumer” column, the entry for each scenario assumes that consumption of the metabolite is coupled with biomass production. The importance assignments are qualitative, and reflect whether the consumer experienced an increase in metabolite flux in the explanatory scenario (high for increased flux, low for decreased flux).}
 \end{figure}
 
@@ -303,7 +305,7 @@ ConYE can identify metabolites that are potentially cross-fed, but the actual be
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[width=0.8\textwidth]{ch2_figS3}
+\includegraphics[width=0.7\textwidth]{ch2_figS3}
 \caption[Computational model-driven interrogation of potential metabolic interactions and experimental validation of a cross-feeding interaction.]{\textbf{Computational model-driven interrogation of potential metabolic interactions}  \textbf{A)} Process for generating and applying a genome-scale metabolic network reconstruction (GENRE). \textbf{B)} Novel pipeline for constructing and analyzing ensembles of GENREs for the ASF strains. Details for each step in Methods. \textbf{C)} EnsembleFBA predictions of the influence of potentially cross-fed metabolites on growth of \textit{Clostridium} ASF356. Biomass production values are for flux through the biomass reaction in units of hour-1, and a metabolite was considered essential if removal led to flux through the biomass reaction of less than \textless\! 1E-5/hour. Predicted flux through biomass in the experimental medium without any supplement or metabolite removal is 0.079/hour.}
 \end{figure*}
 
@@ -319,7 +321,7 @@ After performing these supplementation experiments, we attempted identification 
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[width=0.8\textwidth]{ch2_figS5}
+\includegraphics[width=0.6\textwidth]{ch2_figS5}
 \caption[2D $^1\!$H NMR spectra collected on a single sample of supernatant from co-culture of \textit{Clostridium} ASF356 and \textit{Parabacteroides} ASF519]{\textbf{2D $^1\!$H NMR spectra collected on a single sample of supernatant from co-culture of \textit{Clostridium} ASF356 and \textit{Parabacteroides} ASF519} 2D spectra show gamma-aminobutyrate, not 5-aminovalerate, in the region overlapping with valine in 1D. Peaks corresponding to valine shown in red, gamma-aminobutyrate shown in blue.}
 \end{figure*}
 
@@ -401,7 +403,7 @@ For each sample group, metabolite integrals were centered by subtracting the mea
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[width=0.8\textwidth]{ch2_figS4}
+\includegraphics[width=0.65\textwidth]{ch2_figS4}
 \caption[Selected examples of ConYE results using bootstrapped strain abundances.]{\textbf{Selected examples of ConYE results using bootstrapped strain abundances.} Top row shows the distribution of ConYE \textit{p}-values for each metabolite and bottom row shows the distribution of difference from the expected value for the same metabolite within each column. Examples are from the co-culture of \textit{Clostridium} ASF356 and \textit{Parabacteroides} ASF519. Distributions were generated by recalculating the average abundance of each strain in monoculture using leave-two-out bootstrapped samples prior to calculating the monoculture yield for each metabolite. N=50 samples with replacement for each monoculture.}
 \end{figure*}
 
@@ -477,7 +479,7 @@ We acknowledge the UVA ARCS staff for assistance setting up software used for ga
 
 \begin{suppfigure*}
 \centering
-\includegraphics[width=\textwidth]{ch2_figS2}
+\includegraphics[width=0.9\textwidth]{ch2_figS2}
 \caption[Optical density-based growth curves for \textit{Clostridium} ASF356, \textit{Lactobacillus} ASF360, \textit{Lactobacillus} ASF361, \textit{Eubacterium} ASF492, and \textit{Parabacteroides} ASF519.]{\textbf{Optical density-based growth curves for \textit{Clostridium} ASF356, \textit{Lactobacillus} ASF360, \textit{Lactobacillus} ASF361, \textit{Eubacterium} ASF492, and \textit{Parabacteroides} ASF519.} Optical density was measured at 589nm. Experiments were performed in 96 well plates with 200{\textmu}L total volume in each well. Each sample group (monocultures and co-cultures) contains 8 biological replicates from a single experiment (e.g. each replicate was grown in an independent well, but they were derived from the same starter culture). Line shows the mean for each sample group, and shading extends one standard deviation from the mean in both the positive and negative direction. Sky blue line indicates monoculture for the strain labelled in sky blue along the x axis. Orange line indicates monoculture for the strain labelled in orange along the y axis. Black line indicates co-culture of the two strains. Diagonal shows the monoculture growth curve for each species. Axes units are identical on all subplots. Time is shown in hours, extending to 72 hours.}
 \end{suppfigure*}
 
@@ -519,7 +521,7 @@ One way to view this issue is through the lens of a sensitivity analysis, asking
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[width=\textwidth]{ch3_fig1}
+\includegraphics[width=0.9\textwidth]{ch3_fig1}
 \caption[ Approach for a simulation-guided recommendation system for curation of genome-scale metabolic models.]{\textbf{ Approach for a simulation-guided recommendation system for curation of genome-scale metabolic models.} \textbf{a)} A draft GEM is generated using ModelSEED. Algorithmic gapfilling is applied so that the GEM can recapitulate experimental observations, and the process is repeated to identify alternative solutions. These alternative solutions are assembled into an ensemble of GEMs, each of which contains the original content of the draft GEM and a unique set of gapfilled reactions. \textbf{b)} Single gene knockouts are performed using the ensemble, in which production of biomass is evaluated when reactions requiring each gene are inactivated. \textbf{c-d)} Machine learning approach for identifying curation targets based on ensemble simulations. Unsupervised machine learning is applied to the ensemble simulation results, generating two simulation clusters (cluster 1 [red] and cluster 2 [blue]). Here, principal coordinate analysis is used to visualize the similarity of simulation profiles for all models within an ensemble. Simulation clusters are then used as labels in supervised machine learning, which are predicted using model reaction content as input to a random forest classifier. Curation is prioritized based on the features contributing to classifier performance.}
 \end{figure*}
 
@@ -537,7 +539,7 @@ Our approach, which can be generalized to any mechanistic model and simulation t
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{ch3_fig3}
+\includegraphics[width=0.85\textwidth]{ch3_fig3}
 \caption[ Application of the curation guidance pipeline to bacterial species.]{\textbf{ Application of the curation guidance pipeline to bacterial species.}  \textbf{a \& c)} Ensemble gene essentiality simulations and unsupervised learning for three representative species. Each heatmap displays essentiality simulations for each ensemble member (row label) after inactivating a single gene (column label). Black cells indicate genes predicted to be essential while white cells indicate genes predicted to be non-essential. Principal coordinate analysis (PCoA) plots next to each heatmap show the similarity between gene essentiality simulation profiles for each ensemble member. Within each PCoA plot, each point represents an ensemble member, colored by cluster membership as determined with k-means clustering (k=2). Percent variance in the pairwise distance matrix explained by each principal coordinate is indicated in parentheses. See Methods for analysis details. \textbf{b)} Example of a network feature driving simulation cluster membership. The top reaction, catalyzed by serine hydroxymethyltransferase, is the primary activity of the enzyme, which was annotated in the draft GEM. The bottom reaction is a promiscuous function of the same enzyme, which was the most important reaction in determining cluster membership (k=2) for \textit{Corynebacterium glutamicum}. (abbreviations; THF is tetrahydrofolate and 5,10-mTHF is 5,10-Methylenetetrahydrofolate). Water is excluded from reactants in the top reaction to simplify visualization. \textbf{d)} Evaluation of performance of GEMs in each simulation cluster compared to genome-wide gene essentiality data. Essentiality datasets from in vitro experiments were collected for \textit{Haemophilus influenzae} and \textit{Staphylococcus aureus}. Precision (TP/[TP + FP], TP = true positives, FP = false positives) and recall (TP/[TP+FN], FN = false negatives) were calculated for each ensemble member for each species. Small red and blue circles indicate an individual ensemble member, colored by simulation cluster membership. Large red and blue circles indicate mean behavior for ensemble members from each cluster, and error bars of same color extend above and below the mean by one standard deviation.}
 \end{figure*}
 
@@ -713,7 +715,7 @@ Medusa is developed partially with test-driven development. Tests are implemente
 
 \begin{figure}[tb]
 \centering
-\includegraphics[width=0.9\linewidth]{ch4_fig1}
+\includegraphics[width=0.5\linewidth]{ch4_fig1}
 \caption[ Architecture of ensembles in Medusa.]{\textbf{ Architecture of ensembles in Medusa.} Ensemble functionality is implemented in Medusa through the Ensemble class. The Ensemble class exposes three attributes to the user: features, members, and base\_model. Both features and members are container-like objects similar to genes, reactions, and metabolites in COBRApy. Within each container, Medusa objects of class Feature and Member are stored. The base\_model attribute points to a COBRApy Model. This base\_model contains all of the features present in any member of the ensemble, and is manipulated when generating an ensemble or performing simulations.}
 \end{figure}
 
@@ -725,13 +727,13 @@ Currently, users can perform FBA, flux variability analysis (FVA), single gene d
 
 \begin{figure}[tb]
 \centering
-\includegraphics[width=\linewidth]{ch4_fig2}
+\includegraphics[width=0.7\linewidth]{ch4_fig2}
 \caption[ Description and shape of simulation results for common COBRA methods as implemented in Medusa.]{\textbf{ Description and shape of simulation results for common COBRA methods as implemented in Medusa.} Each simulation method returns a distribution-equivalent to the single-model simulation result.}
 \end{figure}
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[width=\textwidth]{ch4_fig3}
+\includegraphics[width=0.8\textwidth]{ch4_fig3}
 \caption[ Comparison of ensemble flux balance analysis (FBA) simulations across different conditions (A) and before and after ensemble-guided curation (B).]{\textbf{ Comparison of ensemble flux balance analysis (FBA) simulations across different conditions (A) and before and after ensemble-guided curation (B).} \textbf{A)} Ensemble FBA performed on glucose or mannose minimal media using an ensemble of 1000 GEMs for \textit{Staphylococcus aureus}. Mean for the distribution for either condition shown by vertical line of same color. Predicted flux through biomass is higher on mannose than glucose (Mann-Whitney U-test, \textit{p} \textless\! 0.05). \textbf{B)} Ensemble FBA performed on complete medium (uptake of -1000 mmol/g*DW*hr allowed for all metabolites) using an ensemble of 1000 GEMs for \textit{S. aureus}. Mean for the distributions before and after curation shown by vertical line of same color. Ensemble and machine-learning guided curation identified N-Formimino-L-glutamate iminohydrolase as a driver of variation in simulated flux through biomass. Based on a literature search, this reaction was inactivated in all ensemble members and ensemble FBA was performed again, resulting in the shift in the distribution shown. See documentation for full narrative-style example: \url{https://medusa.readthedocs.io/en/latest/machine_learning.html}.}
 \end{figure*}
 
@@ -752,7 +754,7 @@ In this example, a previously generated ensemble is loaded into Medusa, media co
 
 \begin{figure*}[!tb]
 \centering
-\includegraphics[width=0.9\textwidth]{ch4_fig4}
+\includegraphics[width=0.7\textwidth]{ch4_fig4}
 \caption[ Iterative gapfilling strategy used to generate ensembles implemented in Medusa.]{\textbf{ Iterative gapfilling strategy used to generate ensembles implemented in Medusa.}  \textbf{A)} Given a list of conditions in which an organism satisfied some objective (e.g. secretion of a specific metabolite, growth) and a draft GENRE for the organism, gapfilling is performed sequentially on each condition. After each gapfill step on a single condition, reactions in the gapfill solution are added to the GENRE before starting gapfilling on the next condition. In this schematic, all conditions are used, but Medusa also allows users to randomly subsample a fraction of conditions to generate more variation in the resulting gapfilled GENREs. Here, gapfilling is performed to enable growth in the presence of each individual metabolite (indicated by a green arrow for a single condition during each gapfill step). \textbf{B)} Medusa iteratively performs gapfilling as shown in panel \textbf{A}, then shuffles the order of conditions to introduce variation in the gapfill solution. After a user-defined number of cycles through the process shown in panel \textbf{A}, Medusa generates an ensemble containing all unique GENREs that resulted from gapfilling.}
 \end{figure*}
 
